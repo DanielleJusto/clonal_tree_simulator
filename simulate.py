@@ -1,6 +1,7 @@
 from cell import *
 from chain import *
 import random
+import math
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -70,8 +71,14 @@ def simulate(population, time_period, dP):
         return population
 
 
-def make_sparse():
-    pass
+def make_sparse(population, portion_removed):
+    # 1. Randomly sample some portion of the cells
+    sample = random.choices(population, k = math.floor(len(population)*portion_removed))
+    # 2. Remove them from the population
+    for i in sample:
+        if i in population:
+            population.remove(i)
+    return population
 
 def main():
 
@@ -84,8 +91,13 @@ def main():
     d_prob = 1 # change in probability each mutation
 
     new_population = simulate(population, 100, d_prob)
-    
-    # 3. Create a dataframe of cells
+
+    # # UNCOMMENT TO MAKE SPARSE DATA ------------------------------
+    # # X3. Make data sparse -- randomly remove cells from population
+    # new_population = make_sparse(new_population, 0.25)
+    # # ------------------------------------------------------------
+
+    # 4. Create a dataframe of cells
     heavy_chain = []
     light_chain = []
     generation = []
@@ -103,7 +115,7 @@ def main():
     
     df = pd.DataFrame.from_dict(data)
 
-    # 4. Plot of clone generations to verify that the population is made mostly of clones
+    # 5. Plot of clone generations to verify that the population is made mostly of clones
     #    Checking for power law distribution
     plt.hist(df['mutation_prob'])
 
