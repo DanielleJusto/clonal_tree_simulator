@@ -10,8 +10,7 @@ class Cell:
 
     def mutate(self, time_step, d_prob):
         # 1. Select chain
-        # target_chain = random.choice(['heavy_chain', 'light_chain'])
-        target_chain = 'heavy_chain'
+        target_chain = random.choice(['heavy_chain', 'light_chain'])
 
         # 2. Mutate chain
         mutated_chain = getattr(self, target_chain).mutate()
