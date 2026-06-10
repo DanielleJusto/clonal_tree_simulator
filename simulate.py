@@ -69,6 +69,7 @@ def simulate(population, time_period, dP):
 
         return population
 
+
 def make_sparse():
     pass
 
@@ -101,11 +102,14 @@ def main():
             'mutation_prob' : mutation_prob}
     
     df = pd.DataFrame.from_dict(data)
-    print(df.columns)
-    
+
     # 4. Plot of clone generations to verify that the population is made mostly of clones
     #    Checking for power law distribution
     plt.hist(df['mutation_prob'])
+
+    plt.xlabel("Weight/Mutation Probability")
+    plt.ylabel("Frequency")
+
     plt.show()
        
 if __name__ == "__main__":
