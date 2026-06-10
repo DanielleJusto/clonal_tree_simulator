@@ -2,7 +2,7 @@ from chain import *
 
 class Cell:
 
-    def __init__(self, heavy_chain: Chain, light_chain: Chain, generation: int, mutation_prob=0.25):
+    def __init__(self, heavy_chain: Chain, light_chain: Chain, generation: int, mutation_prob=1):
        self.heavy_chain = heavy_chain
        self.light_chain = light_chain
        self.generation = generation,

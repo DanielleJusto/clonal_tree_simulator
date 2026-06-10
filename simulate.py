@@ -79,7 +79,10 @@ def main():
     population = generate_initial_population(light_chain_options)
 
     # 2. Simulate mutation and division
-    new_population = simulate(population, 100, 0.1)
+    simulation_length = 100
+    d_prob = 1 # change in probability each mutation
+
+    new_population = simulate(population, 100, d_prob)
     
     # 3. Create a dataframe of cells
     heavy_chain = []
