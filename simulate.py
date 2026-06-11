@@ -61,7 +61,7 @@ def simulate(population, time_period, dP):
 
             # 2. Mutate
             for target_cell in sample:
-                mutated_cell = target_cell.mutate(t, dP)
+                mutated_cell = target_cell.mutate(dP)
                 # 3. Divide
                 for i in range(0,2):
                     # 4. Update population
@@ -110,16 +110,16 @@ def main():
 
     data = {'heavy' : heavy_chain,
             'light' : light_chain,
-            'gen' : generation, # time generated
+            'gen' : generation, # generation in lineage
             'mutation_prob' : mutation_prob}
     
     df = pd.DataFrame.from_dict(data)
 
     # 5. Plot of clone generations to verify that the population is made mostly of clones
     #    Checking for power law distribution
-    plt.hist(df['mutation_prob'])
+    plt.hist(df['gen'])
 
-    plt.xlabel("Weight/Mutation Probability")
+    plt.xlabel("Generation")
     plt.ylabel("Frequency")
 
     plt.show()
