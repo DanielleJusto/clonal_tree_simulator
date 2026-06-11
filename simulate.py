@@ -101,27 +101,40 @@ def main():
     heavy_chain = []
     light_chain = []
     generation = []
+    parent = []
     mutation_prob = []
+
     for clone in new_population:
         heavy_chain.append(clone.heavy_chain.sequence)
         light_chain.append(clone.light_chain.sequence)
         generation.append(clone.generation)
+        parent.append(clone.parent)
         mutation_prob.append(clone.mutation_probability)
 
     data = {'heavy' : heavy_chain,
             'light' : light_chain,
             'gen' : generation, # generation in lineage
+            'parent' : parent,
             'mutation_prob' : mutation_prob}
     
     df = pd.DataFrame.from_dict(data)
 
     # 5. Plot of clone generations to verify that the population is made mostly of clones
-    #    Checking for power law distribution
-    plt.hist(df['gen'])
+    # plt.hist(df['gen'])
 
-    plt.xlabel("Generation")
-    plt.ylabel("Frequency")
+    # plt.xlabel("Generation")
+    # plt.ylabel("Frequency")
 
+    # plt.show()
+
+    # 6. Plot parent counts to verify that most of the clones are from the original population
+
+    counts = df['parent'].value_counts()
+
+    counts.plot(kind='bar', color='skyblue')
+    plt.xlabel('Parent')
+    plt.ylabel('Count')
+    plt.title('Counts of Cell Parents')
     plt.show()
        
 if __name__ == "__main__":
