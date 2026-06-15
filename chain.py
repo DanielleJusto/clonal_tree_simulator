@@ -10,8 +10,7 @@ class Chain:
             seq = self.sequence
 
             # 1. Choose a random position to mutate
-            # random_ind = random.randint(0,len(seq)-1)
-            random_ind = 0
+            random_ind = random.randint(0, len(seq) - 1)
 
             # 2. Choose mutation
             mutation = random.choices(list({"A", "C", "G", "T"} - {seq[random_ind]}))[0]
